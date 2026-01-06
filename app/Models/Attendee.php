@@ -17,4 +17,9 @@ public function registrations()
 {
     return $this->hasMany(Registration::class);
 }
+
+public function events()
+{
+    return $this->belongsToMany(Event::class, 'registrations');
+}
 }
