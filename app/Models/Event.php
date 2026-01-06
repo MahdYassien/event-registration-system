@@ -10,12 +10,16 @@ class Event extends Model
     'title', 'description', 'date_time', 'location', 'capacity', 'price', 'status'
 ];
 
+protected $casts = [
+    'date_time' => 'datetime',
+];
+
 public function registrations() {
     return $this->hasMany(Registration::class);
 }
 
-// Advanced: You can also link directly to Attendees through Registrations
-public function attendees() {
-    return $this->hasManyThrough(Attendee::class, Registration::class);
+public function attendees()
+{
+    return $this->belongsToMany(Attendee::class, 'registrations');
 }
 }
