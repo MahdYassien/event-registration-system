@@ -3,9 +3,10 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\Admin\EventController as AdminEventController;
 
-// In routes/web.php
-Route::get('/', [App\Http\Controllers\EventController::class, 'publicIndex'])->name('home');
+
+Route::get('/', [EventController::class, 'publicIndex'])->name('home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -17,6 +18,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::resource('events', EventController::class)->middleware(['auth']);
+Route::middleware(['auth'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+        Route::resource('events', AdminEventController::class);
+    });
+
+Route::get('/events/{event}', [EventController::class, 'show'])
+    ->name('events.show');
 
 require __DIR__.'/auth.php';

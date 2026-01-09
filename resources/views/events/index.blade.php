@@ -1,52 +1,47 @@
-<x-app-layout>
-    <x-slot name="header">
-        <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">All Events</h2>
-            <a href="{{ route('events.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm">
-                + Create New Event
-            </a>
-        </div>
-    </x-slot>
+<x-guest-layout>
+    <div class="max-w-7xl mx-auto p-6">
+        <h1 class="text-2xl font-bold mb-6">Upcoming Events</h1>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Title</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Date</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Location</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
-                            @foreach ($events as $event)
-                            <tr>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ $event->title }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ $event->date_time->format('M d, Y H:i') }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ $event->location }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
-                                        {{ $event->status === 'published' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' }}">
-                                        {{ ucfirst($event->status) }}
-                                    </span>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                    <a href="{{ route('events.edit', $event) }}" class="text-indigo-600 hover:text-indigo-900 mr-3">Edit</a>
-                                    <form action="{{ route('events.destroy', $event) }}" method="POST" class="inline">
-                                        @csrf @method('DELETE')
-                                        <button type="submit" class="text-red-600 hover:text-red-900" onclick="return confirm('Delete event?')">Delete</button>
-                                    </form>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+        @forelse ($events as $event)
+            @php
+                $remaining = $event->capacity - $event->registrations()->count();
+            @endphp
+
+            <div class="border p-4 rounded mb-4 shadow-sm hover:shadow-md transition">
+                <h2 class="text-xl font-semibold">{{ $event->title }}</h2>
+
+                <p class="text-gray-600">
+                    📅 {{ \Carbon\Carbon::parse($event->date_time)->format('M d, Y H:i') }}
+                </p>
+
+                <p class="text-gray-600">
+                    📍 {{ $event->location }}
+                </p>
+
+                <p class="mt-2">
+                    {{ $event->description }}
+                </p>
+
+                {{-- Remaining capacity badge --}}
+                <p class="mt-3">
+                    @if($remaining > 0)
+                        <span class="inline-block bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
+                            🧑‍🤝‍🧑 {{ $remaining }} spots left
+                        </span>
+                    @else
+                        <span class="inline-block bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">
+                            ❌ Full
+                        </span>
+                    @endif
+                </p>
+
+                <a href="{{ route('events.show', $event) }}"
+                   class="text-blue-600 mt-2 inline-block">
+                    View Details →
+                </a>
             </div>
-        </div>
+        @empty
+            <p>No upcoming events available.</p>
+        @endforelse
     </div>
-</x-app-layout>
+</x-guest-layout>
