@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
 use Illuminate\Http\Request;
+use App\Models\Registration;
 
 class EventController extends Controller
 {
@@ -70,4 +71,27 @@ class EventController extends Controller
             ->route('admin.events.index')
             ->with('success', 'Event deleted successfully.');
     }
+
+    public function registrations(Event $event)
+{
+    $registrations = $event->registrations()
+        ->with('attendee')
+        ->orderBy('created_at')
+        ->get();
+
+    return view('admin.events.registrations', compact('event', 'registrations'));
+}
+
+
+
+public function cancelRegistration(Registration $registration)
+{
+    $registration->update([
+        'status' => 'cancelled',
+    ]);
+
+    return back()->with('success', 'Registration cancelled successfully.');
+}
+
+
 }

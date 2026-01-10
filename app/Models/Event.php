@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Event extends Model
 {
@@ -21,5 +22,10 @@ public function registrations() {
 public function attendees()
 {
     return $this->belongsToMany(Attendee::class, 'registrations');
+}
+
+public function isCompleted(): bool
+{
+    return Carbon::parse($this->date_time)->isPast();
 }
 }

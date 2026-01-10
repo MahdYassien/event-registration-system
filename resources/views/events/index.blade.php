@@ -4,13 +4,25 @@
 
         @forelse ($events as $event)
             @php
-                $remaining = $event->capacity - $event->registrations()->count();
+                $confirmedCount = $event->registrations()
+                    ->where('status', 'confirmed')
+                    ->count();
+
+                $remaining = $event->capacity - $confirmedCount;
             @endphp
 
             <div class="border p-4 rounded mb-4 shadow-sm hover:shadow-md transition">
-                <h2 class="text-xl font-semibold">{{ $event->title }}</h2>
+                <div class="flex justify-between items-start">
+                    <h2 class="text-xl font-semibold">{{ $event->title }}</h2>
 
-                <p class="text-gray-600">
+                    {{-- Price badge --}}
+                    <span class="inline-block px-3 py-1 rounded-full text-sm font-medium
+                        {{ $event->price ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-gray-800' }}">
+                        {{ $event->price ? '$' . number_format($event->price, 2) : 'Free' }}
+                    </span>
+                </div>
+
+                <p class="text-gray-600 mt-1">
                     📅 {{ \Carbon\Carbon::parse($event->date_time)->format('M d, Y H:i') }}
                 </p>
 
@@ -24,7 +36,7 @@
 
                 {{-- Remaining capacity badge --}}
                 <p class="mt-3">
-                    @if($remaining > 0)
+                    @if ($remaining > 0)
                         <span class="inline-block bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
                             🧑‍🤝‍🧑 {{ $remaining }} spots left
                         </span>
@@ -36,7 +48,7 @@
                 </p>
 
                 <a href="{{ route('events.show', $event) }}"
-                   class="text-blue-600 mt-2 inline-block">
+                   class="text-blue-600 mt-3 inline-block font-medium">
                     View Details →
                 </a>
             </div>

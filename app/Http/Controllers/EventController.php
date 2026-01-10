@@ -23,4 +23,14 @@ class EventController extends Controller
     return view('events.show', compact('event'));
     }
 
+    public function index()
+{
+    $events = Event::where('date_time', '>', now())
+        ->orderBy('date_time')
+        ->get();
+
+    return view('events.index', compact('events'));
+}
+
+
 }
