@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use App\Models\Registration;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class EventController extends Controller
 {
@@ -92,6 +93,43 @@ public function cancelRegistration(Registration $registration)
 
     return back()->with('success', 'Registration cancelled successfully.');
 }
+
+
+
+public function exportRegistrations(Event $event): StreamedResponse
+{
+    $fileName = 'event_' . $event->id . '_registrations.csv';
+
+    return response()->streamDownload(function () use ($event) {
+        $handle = fopen('php://output', 'w');
+
+        // CSV Header
+        fputcsv($handle, [
+            'Name',
+            'Email',
+            'Phone',
+            'Company',
+            'Status',
+            'Registered At'
+        ]);
+
+        foreach ($event->registrations()->with('attendee')->get() as $registration) {
+            fputcsv($handle, [
+                $registration->attendee->name,
+                $registration->attendee->email,
+                $registration->attendee->phone,
+                $registration->attendee->company,
+                ucfirst($registration->status),
+                $registration->created_at->format('Y-m-d H:i'),
+            ]);
+        }
+
+        fclose($handle);
+    }, $fileName, [
+        'Content-Type' => 'text/csv',
+    ]);
+}
+
 
 
 }

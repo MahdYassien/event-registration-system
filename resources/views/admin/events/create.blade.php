@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="max-w-xl mx-auto p-6">
-        <h1 class="text-xl font-bold mb-4">Create Event</h1>
+        <h1 class="text-xl font-bold mb-4 text-white">Create Event</h1>
 
         <form method="POST" action="{{ route('admin.events.store') }}">
             @csrf

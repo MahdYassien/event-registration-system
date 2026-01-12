@@ -1,6 +1,16 @@
 <x-guest-layout>
     <div class="max-w-7xl mx-auto p-6">
-        <h1 class="text-2xl font-bold mb-6">Upcoming Events</h1>
+
+         @guest
+            <div class="flex justify-end mb-6">
+                <a href="{{ route('login') }}"
+                class="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700">
+                    Login as Admin
+                </a>
+            </div>
+        @endguest
+
+        <h1 class="text-2xl font-bold mb-6 text-white">Upcoming Events</h1>
 
         @forelse ($events as $event)
             @php
@@ -13,24 +23,23 @@
 
             <div class="border p-4 rounded mb-4 shadow-sm hover:shadow-md transition">
                 <div class="flex justify-between items-start">
-                    <h2 class="text-xl font-semibold">{{ $event->title }}</h2>
+                    <h2 class="text-xl font-semibold text-white">{{ $event->title }}</h2>
 
                     {{-- Price badge --}}
-                    <span class="inline-block px-3 py-1 rounded-full text-sm font-medium
-                        {{ $event->price ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-gray-800' }}">
+                    <span class="inline-block px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800">
                         {{ $event->price ? '$' . number_format($event->price, 2) : 'Free' }}
                     </span>
                 </div>
 
-                <p class="text-gray-600 mt-1">
+                <p class="text-gray-500 mt-1">
                     📅 {{ \Carbon\Carbon::parse($event->date_time)->format('M d, Y H:i') }}
                 </p>
 
-                <p class="text-gray-600">
+                <p class="text-gray-500">
                     📍 {{ $event->location }}
                 </p>
 
-                <p class="mt-2">
+                <p class="mt-2 text-white">
                     {{ $event->description }}
                 </p>
 

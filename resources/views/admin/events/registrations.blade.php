@@ -2,7 +2,7 @@
     <div class="max-w-7xl mx-auto p-6">
 
         {{-- Page Title --}}
-        <h1 class="text-xl font-bold mb-4">
+        <h1 class="text-xl font-bold mb-4 text-white">
             Registrations – {{ $event->title }}
         </h1>
 
@@ -12,6 +12,13 @@
                 {{ session('success') }}
             </div>
         @endif
+
+        <div class="mb-4">
+            <a href="{{ route('admin.events.registrations.export', $event) }}"
+                class="bg-green-600 text-white px-4 py-2 rounded">
+                Export CSV
+            </a>
+        </div>
 
         {{-- Registrations Table --}}
         <table class="w-full border border-gray-300">
@@ -29,11 +36,11 @@
                 @forelse ($registrations as $registration)
                     <tr class="border-t">
 
-                        <td class="p-2 border">
+                        <td class="p-2 border text-white">
                             {{ $registration->attendee->name }}
                         </td>
 
-                        <td class="p-2 border">
+                        <td class="p-2 border text-white">
                             {{ $registration->attendee->email }}
                         </td>
 
@@ -47,7 +54,7 @@
                             </span>
                         </td>
 
-                        <td class="p-2 border">
+                        <td class="p-2 border text-white">
                             {{ $registration->created_at->format('M d, Y H:i') }}
                         </td>
 

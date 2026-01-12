@@ -24,6 +24,16 @@ Route::middleware(['auth'])
     ->name('admin.')
     ->group(function () {
         Route::resource('events', AdminEventController::class);
+
+        Route::get(
+            'events/{event}/registrations',
+            [AdminEventController::class, 'registrations']
+        )->name('events.registrations');
+
+        Route::get(
+            'events/{event}/registrations/export',
+            [AdminEventController::class, 'exportRegistrations']
+        )->name('events.registrations.export');
     });
 
 Route::get('/events/{event}', [EventController::class, 'show'])
@@ -32,14 +42,11 @@ Route::get('/events/{event}', [EventController::class, 'show'])
 Route::post('/events/{event}/register', [RegistrationController::class, 'store'])
     ->name('events.register');
 
-Route::get('events/{event}/registrations',
-    [AdminEventController::class, 'registrations']
-)->name('admin.events.registrations');
-
 Route::patch(
     'registrations/{registration}/cancel',
     [AdminEventController::class, 'cancelRegistration']
 )->name('admin.registrations.cancel');
+
 
 
 require __DIR__.'/auth.php';

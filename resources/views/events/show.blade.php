@@ -1,23 +1,22 @@
 <x-guest-layout>
     <div class="max-w-4xl mx-auto p-6">
         <div class="flex justify-between items-start">
-                    <h2 class="text-xl font-semibold">{{ $event->title }}</h2>
+                    <h2 class="text-xl font-semibold text-white">{{ $event->title }}</h2>
 
                     {{-- Price badge --}}
-                    <span class="inline-block px-3 py-1 rounded-full text-sm font-medium
-                        {{ $event->price ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-gray-800' }}">
+                    <span class="inline-block px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800">
                         {{ $event->price ? '$' . number_format($event->price, 2) : 'Free' }}
                     </span>
                 </div>
-        <p class="text-gray-600 mb-2">
+        <p class="text-gray-500 mb-2">
             📅 {{ \Carbon\Carbon::parse($event->date_time)->format('M d, Y H:i') }}
         </p>
 
-        <p class="text-gray-600 mb-2">
+        <p class="text-gray-500 mb-2">
             📍 {{ $event->location }}
         </p>
 
-        <p class="mt-4">
+        <p class="mt-4 text-white">
             {{ $event->description }}
         </p>
 
@@ -27,7 +26,7 @@
 
         {{-- Capacity info --}}
         <div class="mt-4">
-            <p class="text-gray-700 font-medium">
+            <p class="text-gray-500 font-medium">
                 🧑‍🤝‍🧑 Capacity: {{ $event->capacity }}
             </p>
         </div>
@@ -68,16 +67,16 @@
                 Register
             </button>
         </form>
-
+            
         @if (session('success'))
-            <div class="bg-green-100 text-green-800 p-2 mb-4">
+            <div class="bg-green-100 text-green-800 p-2 mt-4 mb-4">
                 {{ session('success') }}
             </div>
         @endif
 
         
         @if ($errors->any())
-            <div class="bg-red-100 text-red-800 p-2 mb-4">
+            <div class="bg-red-100 text-red-800 p-2 mt-4 mb-4">
                 {{ $errors->first() }}
             </div>
         @endif

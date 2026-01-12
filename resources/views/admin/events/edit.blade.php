@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="max-w-xl mx-auto p-6">
-        <h1 class="text-xl font-bold mb-4">Edit Event</h1>
+        <h1 class="text-xl font-bold mb-4 text-white">Edit Event</h1>
 
         <form method="POST" action="{{ route('admin.events.update', $event) }}">
             @csrf
