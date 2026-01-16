@@ -2,12 +2,17 @@
     <div class="max-w-7xl mx-auto p-6">
 
         @guest
-            <div class="flex justify-end mb-6">
+            <div class="flex justify-end gap-3 mb-6">
                 <a href="{{ route('login') }}" class="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700">
                     Login as Admin
                 </a>
+
+                <a href="{{ route('register') }}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500">
+                    Register as Admin
+                </a>
             </div>
         @endguest
+
 
         <h1 class="text-2xl font-bold mb-6 text-white">Upcoming Events</h1>
 
