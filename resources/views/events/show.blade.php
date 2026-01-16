@@ -15,9 +15,10 @@
             📍 {{ $event->location }}
         </p>
 
-        <p class="mt-4 text-white">
+        <p class="mt-4 text-white break-words whitespace-normal">
             {{ $event->description }}
         </p>
+
 
         @php
             $remaining = $event->capacity - $event->registrations()->count();

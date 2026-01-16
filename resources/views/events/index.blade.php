@@ -1,10 +1,9 @@
 <x-guest-layout>
     <div class="max-w-7xl mx-auto p-6">
 
-         @guest
+        @guest
             <div class="flex justify-end mb-6">
-                <a href="{{ route('login') }}"
-                class="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700">
+                <a href="{{ route('login') }}" class="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700">
                     Login as Admin
                 </a>
             </div>
@@ -14,9 +13,7 @@
 
         @forelse ($events as $event)
             @php
-                $confirmedCount = $event->registrations()
-                    ->where('status', 'confirmed')
-                    ->count();
+                $confirmedCount = $event->registrations()->where('status', 'confirmed')->count();
 
                 $remaining = $event->capacity - $confirmedCount;
             @endphp
@@ -25,7 +22,6 @@
                 <div class="flex justify-between items-start">
                     <h2 class="text-xl font-semibold text-white">{{ $event->title }}</h2>
 
-                    {{-- Price badge --}}
                     <span class="inline-block px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800">
                         {{ $event->price ? '$' . number_format($event->price, 2) : 'Free' }}
                     </span>
@@ -39,14 +35,15 @@
                     📍 {{ $event->location }}
                 </p>
 
-                <p class="mt-2 text-white">
+                <p class="mt-4 text-white break-words whitespace-normal">
                     {{ $event->description }}
                 </p>
 
-                {{-- Remaining capacity badge --}}
+
                 <p class="mt-3">
                     @if ($remaining > 0)
-                        <span class="inline-block bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
+                        <span
+                            class="inline-block bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
                             🧑‍🤝‍🧑 {{ $remaining }} spots left
                         </span>
                     @else
@@ -56,8 +53,7 @@
                     @endif
                 </p>
 
-                <a href="{{ route('events.show', $event) }}"
-                   class="text-blue-600 mt-3 inline-block font-medium">
+                <a href="{{ route('events.show', $event) }}" class="text-blue-600 mt-3 inline-block font-medium">
                     View Details →
                 </a>
             </div>
