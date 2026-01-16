@@ -65,7 +65,7 @@ It demonstrates real-world backend and frontend concepts using Laravel, includin
 ## Installation & Setup
 
 ### 1. Clone the Repository
-- git clone https://github.com/YOUR_USERNAME/event-registration.git
+- git clone https://github.com/MahdYassien/event-registration-system
 - cd event-registration
 
 ### 2. Install Dependencies
@@ -140,7 +140,7 @@ This project was completed as part of a time-bound assessment, with emphasis on:
 
 ## Submission
 Repository URL:
-https://github.com/MahdYassien/event-registration
+https://github.com/MahdYassien/event-registration-system
 
 **How to Run:**
 - Clone repository
