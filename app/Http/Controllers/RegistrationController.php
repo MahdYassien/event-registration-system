@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Event;
 use App\Models\Attendee;
+use App\Models\Event;
 use App\Models\Registration;
 use Illuminate\Http\Request;
 
@@ -18,9 +18,9 @@ class RegistrationController extends Controller
 
         // 2️⃣ Validate input
         $validated = $request->validate([
-            'name'    => 'required|string|max:255',
-            'email'   => 'required|email',
-            'phone'   => 'nullable|string',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email',
+            'phone' => 'nullable|string',
             'company' => 'nullable|string',
         ]);
 
@@ -51,11 +51,11 @@ class RegistrationController extends Controller
 
         // 7️⃣ Create registration
         Registration::create([
-            'event_id'          => $event->id,
-            'attendee_id'       => $attendee->id,
+            'event_id' => $event->id,
+            'attendee_id' => $attendee->id,
             'registration_date' => now(),
-            'status'            => $status,
-            'payment_status'    => 'pending',
+            'status' => $status,
+            'payment_status' => 'pending',
         ]);
 
         return back()->with(

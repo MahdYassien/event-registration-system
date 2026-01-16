@@ -10,19 +10,19 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-{
-    Schema::create('events', function (Blueprint $table) {
-        $table->id();
-        $table->string('title');
-        $table->text('description');
-        $table->dateTime('date_time');
-        $table->string('location');
-        $table->integer('capacity');
-        $table->decimal('price', 8, 2)->nullable(); // 8 total digits, 2 after decimal
-        $table->enum('status', ['draft', 'published', 'cancelled', 'completed'])->default('draft');
-        $table->timestamps();
-    });
-}
+    {
+        Schema::create('events', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->text('description');
+            $table->dateTime('date_time');
+            $table->string('location');
+            $table->integer('capacity');
+            $table->decimal('price', 8, 2)->nullable(); // 8 total digits, 2 after decimal
+            $table->enum('status', ['draft', 'published', 'cancelled', 'completed'])->default('draft');
+            $table->timestamps();
+        });
+    }
 
     /**
      * Reverse the migrations.

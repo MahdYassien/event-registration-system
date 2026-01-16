@@ -10,16 +10,16 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-{
-    Schema::create('attendees', function (Blueprint $table) {
-        $table->id();
-        $table->string('name');
-        $table->string('email')->unique(); // Unique index prevents duplicate emails
-        $table->string('phone')->nullable(); // Optional field
-        $table->string('company')->nullable();
-        $table->timestamps();
-    });
-}
+    {
+        Schema::create('attendees', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->string('phone')->nullable();
+            $table->string('company')->nullable();
+            $table->timestamps();
+        });
+    }
 
     /**
      * Reverse the migrations.

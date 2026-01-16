@@ -18,10 +18,8 @@ class EventController extends Controller
 
     public function show(Event $event)
     {
-    abort_if($event->status !== 'published', 404);
+        abort_if($event->status !== 'published', 404);
 
-    return view('events.show', compact('event'));
+        return view('events.show', compact('event'));
     }
-
-
 }

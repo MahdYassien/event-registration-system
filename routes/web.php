@@ -1,11 +1,10 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\EventController;
 use App\Http\Controllers\Admin\EventController as AdminEventController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegistrationController;
-
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', [EventController::class, 'publicIndex'])->name('home');
 
@@ -46,7 +45,5 @@ Route::patch(
     'registrations/{registration}/cancel',
     [AdminEventController::class, 'cancelRegistration']
 )->name('admin.registrations.cancel');
-
-
 
 require __DIR__.'/auth.php';
