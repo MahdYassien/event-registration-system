@@ -4,7 +4,8 @@ use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Schedule;
 
-Schedule::command('events:complete-past')->hourly();
+Schedule::command('events:complete-past')->daily();
+
 
 
 Artisan::command('inspire', function () {
