@@ -95,7 +95,7 @@ http://127.0.0.1:8000
 ---
 
 ## Scheduled Tasks (Auto-Complete Past Events)
- **The application includes a custom Artisan command that automatically updates past events to completed.**
+ The application includes a custom Artisan command that automatically updates past events to completed.
 - php artisan events:complete-past
 - Scheduled via Laravel Scheduler
 - This command is configured to run automatically using Laravel’s scheduling system.
@@ -108,7 +108,7 @@ Admins can export event registrations as a CSV file, including:
 - Email
 - Status
 - Registration date
-This demonstrates practical reporting functionality.
+**This demonstrates practical reporting functionality.**
 
 ---
 
@@ -130,11 +130,11 @@ database/
 
 ## Assessment Notes
 This project was completed as part of a time-bound assessment, with emphasis on:
--Clean MVC architecture
--Laravel best practices
--Realistic feature implementation
--Git version control
--Clear separation of public and admin functionality
+- Clean MVC architecture
+- Laravel best practices
+- Realistic feature implementation
+- Git version control
+- Clear separation of public and admin functionality
 
 ---
 
@@ -142,12 +142,12 @@ This project was completed as part of a time-bound assessment, with emphasis on:
 Repository URL:
 https://github.com/MahdYassien/event-registration
 
-How to Run:
--Clone repository
--Install dependencies
--Configure .env
--Run migrations
--Serve the application
+**How to Run:**
+- Clone repository
+- Install dependencies
+- Configure .env
+- Run migrations
+- Serve the application
 
 ---
 
