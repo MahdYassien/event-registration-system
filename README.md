@@ -65,45 +65,52 @@ It demonstrates real-world backend and frontend concepts using Laravel, includin
 ## Installation & Setup
 
 ### 1. Clone the Repository
--git clone https://github.com/YOUR_USERNAME/event-registration.git
--cd event-registration
+- git clone https://github.com/YOUR_USERNAME/event-registration.git
+- cd event-registration
 
 ### 2. Install Dependencies
--composer install
--npm install
--npm run build
+- composer install
+- npm install
+- npm run build
 
 ### 3. Environment Setup
--cp .env.example .env
--php artisan key:generate
+- cp .env.example .env
+- php artisan key:generate
 
 ### 4. Database Migration
--php artisan migrate
+- php artisan migrate
 
 ### 5. Run the Application
--php artisan serve
--The app will be available at:
--http://127.0.0.1:8000
+- php artisan serve
+- The app will be available at:
+http://127.0.0.1:8000
+
+---
 
 ## Admin Access
--Login page: /login
--Admin dashboard: /admin/events
--Admin routes are protected using authentication middleware
+- Login page: /login
+- Admin dashboard: /admin/events
+- Admin routes are protected using authentication middleware
+
+---
 
 ## Scheduled Tasks (Auto-Complete Past Events)
--The application includes a custom Artisan command that automatically updates past events to completed.
--Run manually:
--php artisan events:complete-past
--Scheduled via Laravel Scheduler
--This command is configured to run automatically using Laravel’s scheduling system.
+ **The application includes a custom Artisan command that automatically updates past events to completed.**
+- php artisan events:complete-past
+- Scheduled via Laravel Scheduler
+- This command is configured to run automatically using Laravel’s scheduling system.
+
+---
 
 ## CSV Export
--Admins can export event registrations as a CSV file, including:
--Attendee name
--Email
--Status
--Registration date
--This demonstrates practical reporting functionality.
+Admins can export event registrations as a CSV file, including:
+- Attendee name
+- Email
+- Status
+- Registration date
+This demonstrates practical reporting functionality.
+
+---
 
 ## Project Structure Overview
 app/
@@ -119,27 +126,35 @@ resources/
 database/
  └── migrations
 
+---
+
 ## Assessment Notes
 This project was completed as part of a time-bound assessment, with emphasis on:
-Clean MVC architecture
-Laravel best practices
-Realistic feature implementation
-Git version control
-Clear separation of public and admin functionality
+-Clean MVC architecture
+-Laravel best practices
+-Realistic feature implementation
+-Git version control
+-Clear separation of public and admin functionality
+
+---
 
 ## Submission
 Repository URL:
 https://github.com/MahdYassien/event-registration
 
 How to Run:
-Clone repository
-Install dependencies
-Configure .env
-Run migrations
-Serve the application
+-Clone repository
+-Install dependencies
+-Configure .env
+-Run migrations
+-Serve the application
+
+---
 
 ## Admin Credentials:
 Use the registration page to create an admin account, then log in via /login.
+
+---
 
 ## License
 This project is built using the Laravel framework, which is open-sourced software licensed under the MIT license.
